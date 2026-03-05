@@ -1,4 +1,6 @@
 
+`runs`, `DJI_0720.MP4` 넣기
+
 
 ```bash
 mkdir -p 0720
