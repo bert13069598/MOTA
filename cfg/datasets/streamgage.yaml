@@ -1,0 +1,40 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: /home/deepet/Downloads/datasets/291.수위 측정 데이터/01-1.정식개방데이터
+train: images/train # train images (relative to 'path') 4 images
+val: images/val # val images (relative to 'path') 4 images
+test: images/test # test images (relative to 'path') 4 images
+
+names:
+  0: 'surface'
+  1: '0M'
+  2: '1M'
+  3: '2M'
+  4: '3M'
+  5: '4M'
+  6: '5M'
+  7: '6M'
+  8: '7M'
+  9: '8M'
+  10: '9M'
+  11: '10M'
+  12: '11M'
+  13: '12M'
+  14: '13M'
+  15: '14M'
+  16: '15M'
+  17: '16M'
+  18: '17M'
+  19: '18M'
+  20: '19M'
+  21: '20M'
+  22: '0CM'
+  23: '10CM'
+  24: '20CM'
+  25: '30CM'
+  26: '40CM'
+  27: '50CM'
+  28: '60CM'
+  29: '70CM'
+  30: '80CM'
+  31: '90CM'
+  32: 'plate'
