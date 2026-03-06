@@ -18,6 +18,7 @@ parser.add_argument('-o', '--obb', action='store_true', help='whether obb')
 parser.add_argument('-p', '--project', type=str, help='which object trained', default=None)
 parser.add_argument('--show', action='store_true', help='whether show')
 parser.add_argument('--dirs', type=str, help='path to load image data')
+parser.add_argument('--reid', type=str, choices=['on', 'off'], default='on', help='toggle DeepSORT ReID')
 args = parser.parse_args()
 
 if args.obb:
@@ -28,7 +29,7 @@ palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
 track_history = {}
 
 
-def init_tracker():
+def init_tracker(use_reid=True):
     global deepsort
     cfg_deep = get_config()
     cfg_deep.merge_from_file("deep_sort_pytorch/configs/deep_sort.yaml")
@@ -41,7 +42,8 @@ def init_tracker():
                         max_age=cfg_deep.DEEPSORT.MAX_AGE,
                         n_init=cfg_deep.DEEPSORT.N_INIT,
                         nn_budget=cfg_deep.DEEPSORT.NN_BUDGET,
-                        use_cuda=True)
+                        use_cuda=True,
+                        use_reid=use_reid)
 
 
 def compute_color_for_labels(label):
@@ -93,7 +95,9 @@ model = YOLO(f'./runs/{args.model}/{args.project}/weights/best.pt')
 
 if args.show:
     if not args.obb:
-        init_tracker()
+        use_reid = args.reid == 'on'
+        init_tracker(use_reid=use_reid)
+        print(f"[Tracker] DeepSORT mode: {'ReID ON' if use_reid else 'ReID OFF (IOU-only)'}")
     with open(os.path.join('cfg', 'datasets', args.project + '.yaml'), 'r') as f:
         cfg = yaml.safe_load(f)
     if args.dirs:

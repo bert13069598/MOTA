@@ -141,7 +141,8 @@ class Track:
         """
         self.mean, self.covariance = kf.update(
             self.mean, self.covariance, detection.to_xyah())
-        self.features.append(detection.feature)
+        if detection.feature is not None:
+            self.features.append(detection.feature)
 
         self.hits += 1
         self.time_since_update = 0

@@ -29,7 +29,7 @@ class Detection(object):
     def __init__(self, tlwh, confidence, feature, oid):
         self.tlwh = np.asarray(tlwh, dtype=np.float32)
         self.confidence = float(confidence)
-        self.feature = np.asarray(feature, dtype=np.float32)
+        self.feature = None if feature is None else np.asarray(feature, dtype=np.float32)
         self.oid = oid
 
     def to_tlbr(self):
